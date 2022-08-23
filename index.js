@@ -1,53 +1,56 @@
-const currentUser = 'Grace Hopper';
+describe('index.js', () => {
+  describe('currentUser', () => {
+    it('is defined', () => {
+      expect(currentUser, "The 'currentUser' variable must contain a string").to.be.a('string');
+      expect(currentUser, "You need to modify the value of the 'currentUser' variable").to.not.be.empty;
+    });
+  });
 
-const welcomeMessage = 'Welcome to Flatbook, ';
-typeof "const currentUser = 'Grace Hopper';";
-//=> "string"
+  describe('welcomeMessage', () => {
+    it('contains "Welcome to Flatbook, "', () => {
+      expect(welcomeMessage).to.have.string('Welcome to Flatbook, ');
+    });
 
-"const currentUser = 'Grace Hopper';".length;
-//=> 35
+    it("contains the value of the 'currentUser' variable", () => {
+      expect(welcomeMessage).to.have.string(currentUser);
+    });
 
-currentUser;
-//=> Uncaught ReferenceError: currentUser is not defined
-"High " + "five!";
-//=> "High five!"
+    it('ends with an exclamation point!', () => {
+      expect(welcomeMessage.substr(-1)).to.eq('!');
+    });
+  });
 
-"We" + ' ' + `can` + " " + 'concat' + `enate` + " as many strings " + 'as our heart ' + `desires.`;
-//=> "We can concatenate as many strings as our heart desires."
-const currentUser = 'Grace Hopper';
+  describe('excitedWelcomeMessage', () => {
+    it('contains "WELCOME TO FLATBOOK, "', () => {
+      expect(excitedWelcomeMessage).to.have.string('WELCOME TO FLATBOOK, ');
+    });
 
-const welcomeMessage = 'Welcome to Flatbook, ' + currentUser;
-const myString = 'template literal';
+    it("contains the value of the 'currentUser' variable", () => {
+      const upperCaseCurrentUser = currentUser.toUpperCase();
 
-const myNumber = 10;
+      expect(excitedWelcomeMessage).to.have.string(upperCaseCurrentUser);
+    });
 
-const myBoolean = false;
+    it('ends with an exclamation point', () => {
+      expect(excitedWelcomeMessage.substr(-1)).to.eq('!');
+    });
+  });
 
-`Saying that interpolation with ${myString}s is better than concatenation ${90 + myNumber}% of the time is simply ${myBoolean}. But it is pretty cool!
+  describe('shortGreeting', () => {
+    it(`contains "Welcome, "`, () => {
+      expect(shortGreeting).to.have.string('Welcome, ');
+    });
 
-Beware that new lines inside of a ${myString} will be preserved as new lines in the resulting ${typeof myString}!`;
-//=> "Saying that interpolation with template literals is better than concatenation 100% of the time is simply false. But it is pretty cool!
+    it("contains the first initial of the name stored in the 'currentUser' variable", () => {
+      const firstInitial = currentUser[0];
+      const restOfName = currentUser.slice(1);
 
-// Beware that new lines inside of a template literal will be preserved as new lines in the resulting string!"
-const currentUser = 'Grace Hopper';
+      expect(shortGreeting).to.have.string(firstInitial);
+      expect(shortGreeting).to.not.have.string(restOfName);
+    });
 
-const welcomeMessage = `Welcome to Flatbook, ${currentUser}`;
-const currentUser = 'Grace Hopper';
-
-const welcomeMessage = `Welcome to Flatbook, ${currentUser}!`;
-const currentUser = 'Grace Hopper';
-
-const welcomeMessage = `Welcome to Flatbook, ${currentUser}!`;
-
-const excitedWelcomeMessage = welcomeMessage.toUpperCase();
-const currentUser = 'Grace Hopper';
-
-...
-
-const shortGreeting = `Welcome, ${currentUser}`;
-currentUser.slice(0, 1);
-const currentUser = 'Grace Hopper';
-
-...
-
-const shortGreeting = `Welcome, ${currentUser.slice(0, 1)}!`;
+    it('ends with an exclamation point', () => {
+      expect(shortGreeting.substr(-1)).to.eq('!');
+    });
+  });
+});
